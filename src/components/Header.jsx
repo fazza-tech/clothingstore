@@ -1,8 +1,12 @@
 import { ShoppingCart } from 'lucide-react';
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 
+
 const Header = () => {
+
+    const cartItems = useSelector(store => store.cart.items)
   return (
     <header className='bg-white shadow-md'>
         <div className='container mx-auto px-4 py-4 flex items-center justify-between'>
@@ -18,7 +22,7 @@ const Header = () => {
             </nav>
             <div className='flex items-center space-x-2'>
                 <ShoppingCart size={24}/>
-                <span className='text-lg'>Cart</span>
+                <span className='text-lg'>Cart -{cartItems.length}</span>
             </div>
         </div>
     </header>

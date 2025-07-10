@@ -1,8 +1,12 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { PRODUCT_LINK } from "../utils/links";
+import { useDispatch } from "react-redux";
+import { addItem } from "../utils/cartSlice";
 
 const ProductView = () => {
+
+  const dispatch = useDispatch()
   const [data, setData] = useState(null);
   const { id } = useParams();
 
@@ -18,6 +22,10 @@ const ProductView = () => {
     console.log("selected::::", selectedProduct);
 
     setData(selectedProduct);
+  }
+
+  const handleClick = () => {
+    dispatch(addItem(data))
   }
 
   if (!data) return <div>Loading...</div>;
@@ -37,7 +45,9 @@ const ProductView = () => {
           </div>
           <div className="flex gap-4 justify-center mt-5">
             <button className="text-sm text-white bg-gray-600 px-4 py-2 rounded hover:bg-gray-700">Wishlist</button>
-            <button className="text-sm text-white bg-black px-4 py-2 rounded hover:bg-gray-800">Add to cart</button>
+            <button className="text-sm text-white bg-black px-4 py-2 rounded hover:bg-gray-800"
+                    onClick={handleClick}
+                    >Add to cart</button>
           </div>
         </div>
     </div>
